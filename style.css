@@ -1,11 +1,11 @@
 * {
     padding: 0;
     margin: 0;
+    font-family: 'Exo 2', sans-serif;
 }
 
 h1, h2 {
     color: white;
-    font-family: 'Exo 2', sans-serif;
 }
 
 img {
@@ -83,7 +83,7 @@ background-repeat: no-repeat;
 }
 
 .steam-user-container {
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     border: 1px solid red;
@@ -94,4 +94,17 @@ background-repeat: no-repeat;
     margin: 10px;
     display: flex;
     justify-content: center;
+}
+
+.match-container {
+    width: 80%;
+    float: right;
+}
+
+.long-match, .short-match {
+    font-size: larger;
+    margin: 10px;
+    padding: 10px;
+    border-left: 10px solid red;
+    background-color: gray;
 }
