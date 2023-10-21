@@ -10,7 +10,7 @@ function getLocalStorage() {
 function userProfile(name, mmr, pic) {
   var profileImage = document.createElement("div");
   profileImage.classList.add("image-div");
-  profileImage.innerHTML = `<img src="${pic}"/>`;
+  profileImage.innerHTML = `<img class="profile" src="${pic}"/>`;
   playerAccountIdEl.appendChild(profileImage);
 
   var nameParagraph = document.createElement("h2");
@@ -57,6 +57,9 @@ function getMatchesLongShort(idSearch) {
   let assistsS;
   let shortestWin;
 
+  var longMatchIndex;
+  var shortMatchIndex;
+
   fetch(`https://api.opendota.com/api/players/${idSearch}/matches`)
     .then(function (response) {
       return response.json();
@@ -74,17 +77,10 @@ function getMatchesLongShort(idSearch) {
         let playerSlot = matchesArray[i].player_slot;
         let radiantWin = matchesArray[i].radiant_win;
 
-        if (playerSlot <= 4 && radiantWin === true) {
-          longestWin = "Win!";
-          shortestWin = "Loss.";
-        } else if (playerSlot >= 128 && radiantWin === false) {
-          longestWin = "Loss.";
-          shortestWin = "Win.";
-        }
-
         if (arrayDuration > startingLDuration) {
           startingLDuration = arrayDuration;
           longMatchId = matchId;
+          longMatchIndex = i;
           longestHeroNum = heroNumber;
           killsL = kills;
           deathsL = deaths;
@@ -96,14 +92,46 @@ function getMatchesLongShort(idSearch) {
         if (arrayDuration < startingSDuration) {
           startingSDuration = arrayDuration;
           shortMatchId = matchId;
+          shortMatchIndex = i;
           shortestHeroNum = heroNumber;
           killsS = kills;
           deathsS = deaths;
           assistsS = assists;
           var shortest = Math.round(startingSDuration / 60);
-          console.log(playerSlot, radiantWin, shortestWin, shortMatchId);
+          console.log(playerSlot, radiantWin, shortMatchId);
         }
       }
+
+      if (matchesArray[longMatchIndex].player_slot <= 4) {
+        if (matchesArray[longMatchIndex].radiant_win === true) {
+          longestWin = "Win!";
+        } else {
+          longestWin = "Loss.";
+        }
+      } else if (matchesArray[longMatchIndex].radiant_win === true) {
+        longestWin = "Loss.";
+      } else {
+        longestWin = "Win!";
+      }
+
+      if (matchesArray[shortMatchIndex].player_slot <= 4) {
+        if (matchesArray[shortMatchIndex].radiant_win === true) {
+          shortestWin = "Win!";
+        } else {
+          shortestWin = "Loss.";
+        }
+      } else if (matchesArray[shortMatchIndex].radiant_win === true) {
+        shortestWin = "Loss.";
+      } else {
+        shortestWin = "Win!";
+      }
+
+      console.log(
+        longestWin,
+        longMatchId,
+        matchesArray[longMatchIndex].radiant_win
+      );
+      console.log(shortestWin, shortMatchId);
 
       // Fetch hero information for each hero ID
       function fetchHeroInformation() {
@@ -117,18 +145,34 @@ function getMatchesLongShort(idSearch) {
           .then(function (data) {
             let heroInfoLong = data[longestHeroNum];
             let heroInfoShort = data[shortestHeroNum];
-            addContent(heroInfoLong, heroInfoShort);
+            let heroNameL = data[longestHeroNum].img;
+            let heroNameS = data[shortestHeroNum].img;
+            addContent(heroInfoLong, heroInfoShort, heroNameL, heroNameS);
           });
       }
 
       fetchHeroInformation();
 
       // Creates 2 divs with called information inside
-      function addContent(heroInfoLong, heroInfoShort) {
+      function addContent(heroInfoLong, heroInfoShort, heroNameL, heroNameS) {
         // Longest match data
+        let heroLDiv = document.createElement("div");
+        heroLDiv.classList.add("hero-div");
+        matchContainerEl.appendChild(heroLDiv);
+
+        // Hero image L div
+        let heroImgLDiv = document.createElement("div");
+        heroImgLDiv.classList.add("hero-img-div");
+        heroLDiv.appendChild(heroImgLDiv);
+
+        let heroImgL = document.createElement("img");
+        heroImgL.src = `https://api.opendota.com${heroNameL}`;
+        heroImgLDiv.appendChild(heroImgL);
+
+        // Longest match data div
         let longMatchDiv = document.createElement("div");
-        longMatchDiv.classList.add("long-match");
-        matchContainerEl.appendChild(longMatchDiv);
+        longMatchDiv.classList.add("long-match-div");
+        heroLDiv.appendChild(longMatchDiv);
 
         let longMatchNum = document.createElement("h3");
         longMatchNum.innerHTML = `Longest Match ID: ${longMatchId}`;
@@ -150,10 +194,24 @@ function getMatchesLongShort(idSearch) {
         kdaL.innerHTML = `KDA: ${killsL}/${deathsL}/${assistsL}`;
         longMatchDiv.appendChild(kdaL);
 
-        // Shortest match data
+        // Hero S image and match info div
+        let heroSDiv = document.createElement("div");
+        heroSDiv.classList.add("hero-div");
+        matchContainerEl.appendChild(heroSDiv);
+
+        // Hero S image div
+        let heroImgSDiv = document.createElement("div");
+        heroImgSDiv.classList.add("hero-img-div");
+        heroSDiv.appendChild(heroImgSDiv);
+
+        let heroImgS = document.createElement("img");
+        heroImgS.src = `https://api.opendota.com${heroNameS}`;
+        heroImgSDiv.appendChild(heroImgS);
+
+        // Shortest match data div
         let shortMatchDiv = document.createElement("div");
-        shortMatchDiv.classList.add("short-match");
-        matchContainerEl.appendChild(shortMatchDiv);
+        shortMatchDiv.classList.add("short-match-div");
+        heroSDiv.appendChild(shortMatchDiv);
 
         let shortMatchNum = document.createElement("h3");
         shortMatchNum.innerHTML = `Shortest Match ID: ${shortMatchId}`;
