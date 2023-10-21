@@ -4,20 +4,17 @@
     font-family: 'Exo 2', sans-serif;
 }
 
-h1, h2 {
+body {
     color: white;
+    background-image: url(https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/backgrounds/featured.jpg);
 }
-
-img {
-    border-radius: 50%;
-}
-
 .home {
 background-image: url(./images/dota-hero-image.jpg);
 background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center; 
 }
+
 .header-container, .footer-container {
     display: flex;
     justify-content: center;
@@ -85,9 +82,12 @@ background-repeat: no-repeat;
 .steam-user-container {
     display: flex;
     justify-content: center;
-    align-items: center;
     border: 1px solid red;
     background-color: black;
+}
+
+.profile {
+    border-radius: 50%;
 }
 
 .image-div {
@@ -97,14 +97,26 @@ background-repeat: no-repeat;
 }
 
 .match-container {
-    width: 80%;
-    float: right;
+    margin: 5%;
 }
 
-.long-match, .short-match {
+.hero-div {
+    margin: 3%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.hero-img-div {
+    display: flex;
+    justify-content: center;
+    flex-basis: 25%;
+}
+
+.long-match-div, .short-match-div {
+    width: 70%;
+    padding: 1%;
     font-size: larger;
-    margin: 10px;
-    padding: 10px;
-    border-left: 10px solid red;
-    background-color: gray;
+    border: 1px solid black;
+    background-image: linear-gradient(to right, rgb(6, 5, 5, 0.25) , rgba(36, 46, 75, 0.75));
 }
