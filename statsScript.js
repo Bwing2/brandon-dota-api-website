@@ -1,5 +1,5 @@
-const playerAccountIdEl = document.querySelector("#player-account-id");
-const matchContainerEl = document.querySelector(".match-container");
+const playerAccountIdEl = document.querySelector('#player-account-id');
+const matchContainerEl = document.querySelector('.match-container');
 
 let startingLDuration = 0;
 let longestHeroNum;
@@ -23,7 +23,7 @@ let shortest;
 
 // Gets steamID from previous search page
 function getLocalStorage() {
-  var idSearch = JSON.parse(localStorage.getItem("steamId"));
+  var idSearch = JSON.parse(localStorage.getItem('steamId'));
   console.log(idSearch);
   getPlayerData(idSearch);
 }
@@ -37,27 +37,28 @@ function getPlayerData(idSearch) {
       return response.json();
     })
     .then(function (data) {
+      console.log(data);
       let pic = data.profile.avatarmedium;
       let name = data.profile.personaname;
-      let mmr = data.mmr_estimate.estimate;
+      let rank_tier = data.rank_tier;
 
-      userProfile(name, mmr, pic, idSearch);
+      userProfile(name, rank_tier, pic, idSearch);
     });
 }
 
 // Creates div for steam profile pic, steam name, and estimated mmr
-function userProfile(name, mmr, pic, idSearch) {
-  var profileImage = document.createElement("div");
-  profileImage.classList.add("image-div");
+function userProfile(name, rank_tier, pic, idSearch) {
+  var profileImage = document.createElement('div');
+  profileImage.classList.add('image-div');
   profileImage.innerHTML = `<img class="profile" src="${pic}"/>`;
   playerAccountIdEl.appendChild(profileImage);
 
-  var nameParagraph = document.createElement("h2");
+  var nameParagraph = document.createElement('h2');
   nameParagraph.innerHTML = `Steam Name: ${name}`;
   playerAccountIdEl.appendChild(nameParagraph);
 
-  var mmrParagraph = document.createElement("h2");
-  mmrParagraph.innerHTML = `Estimated MMR: ${mmr}`;
+  var mmrParagraph = document.createElement('h2');
+  mmrParagraph.innerHTML = `Rank Tier: ${rank_tier}th Percentile`;
   playerAccountIdEl.appendChild(mmrParagraph);
 
   getMatchesLongShort(idSearch);
@@ -115,26 +116,26 @@ function winOrLoss(matchesArray) {
 
   if (matchesArray[longMatchIndex].player_slot <= 4) {
     if (matchesArray[longMatchIndex].radiant_win === true) {
-      longestWin = "Win!";
+      longestWin = 'Win!';
     } else {
-      longestWin = "Loss.";
+      longestWin = 'Loss.';
     }
   } else if (matchesArray[longMatchIndex].radiant_win === true) {
-    longestWin = "Loss.";
+    longestWin = 'Loss.';
   } else {
-    longestWin = "Win!";
+    longestWin = 'Win!';
   }
 
   if (matchesArray[shortMatchIndex].player_slot <= 4) {
     if (matchesArray[shortMatchIndex].radiant_win === true) {
-      shortestWin = "Win!";
+      shortestWin = 'Win!';
     } else {
-      shortestWin = "Loss.";
+      shortestWin = 'Loss.';
     }
   } else if (matchesArray[shortMatchIndex].radiant_win === true) {
-    shortestWin = "Loss.";
+    shortestWin = 'Loss.';
   } else {
-    shortestWin = "Win!";
+    shortestWin = 'Win!';
   }
 
   console.log(
@@ -150,7 +151,7 @@ function winOrLoss(matchesArray) {
 // Fetch hero information for each hero ID
 function fetchHeroInformation() {
   const heroInfoUrl =
-    "https://raw.githubusercontent.com/odota/dotaconstants/master/build/heroes.json";
+    'https://raw.githubusercontent.com/odota/dotaconstants/master/build/heroes.json';
 
   fetch(heroInfoUrl)
     .then(function (response) {
@@ -169,80 +170,80 @@ function fetchHeroInformation() {
 // Creates 2 divs with called information inside
 function addContent(heroInfoLong, heroInfoShort, heroNameL, heroNameS) {
   // Hero L image and match info div
-  let heroLDiv = document.createElement("div");
-  heroLDiv.classList.add("hero-div");
+  let heroLDiv = document.createElement('div');
+  heroLDiv.classList.add('hero-div');
   matchContainerEl.appendChild(heroLDiv);
 
   // Hero L image div
-  let heroImgLDiv = document.createElement("div");
-  heroImgLDiv.classList.add("hero-img-div");
+  let heroImgLDiv = document.createElement('div');
+  heroImgLDiv.classList.add('hero-img-div');
   heroLDiv.appendChild(heroImgLDiv);
 
-  let heroImgL = document.createElement("img");
+  let heroImgL = document.createElement('img');
   heroImgL.src = `https://api.opendota.com${heroNameL}`;
   heroImgLDiv.appendChild(heroImgL);
 
   // Longest match data div
-  let longMatchDiv = document.createElement("div");
-  longMatchDiv.classList.add("long-match-div");
+  let longMatchDiv = document.createElement('div');
+  longMatchDiv.classList.add('long-match-div');
   heroLDiv.appendChild(longMatchDiv);
 
-  let longMatchNum = document.createElement("h3");
+  let longMatchNum = document.createElement('h3');
   longMatchNum.innerHTML = `Longest Match ID: ${longMatchId}`;
   longMatchDiv.appendChild(longMatchNum);
 
-  let longestGame = document.createElement("p");
+  let longestGame = document.createElement('p');
   longestGame.innerHTML = `Duration: ${longest} minutes`;
   longMatchDiv.appendChild(longestGame);
 
-  let longestWL = document.createElement("p");
+  let longestWL = document.createElement('p');
   longestWL.innerHTML = `Game Result: ${longestWin}`;
   longMatchDiv.appendChild(longestWL);
 
-  let heroL = document.createElement("p");
+  let heroL = document.createElement('p');
   heroL.innerHTML = `Hero: ${heroInfoLong.localized_name}`;
   longMatchDiv.appendChild(heroL);
 
-  let kdaL = document.createElement("p");
+  let kdaL = document.createElement('p');
   kdaL.innerHTML = `KDA: ${killsL}/${deathsL}/${assistsL}`;
   longMatchDiv.appendChild(kdaL);
 
   // Hero S image and match info div
-  let heroSDiv = document.createElement("div");
-  heroSDiv.classList.add("hero-div");
+  let heroSDiv = document.createElement('div');
+  heroSDiv.classList.add('hero-div');
   matchContainerEl.appendChild(heroSDiv);
 
   // Hero S image div
-  let heroImgSDiv = document.createElement("div");
-  heroImgSDiv.classList.add("hero-img-div");
+  let heroImgSDiv = document.createElement('div');
+  heroImgSDiv.classList.add('hero-img-div');
   heroSDiv.appendChild(heroImgSDiv);
 
-  let heroImgS = document.createElement("img");
+  let heroImgS = document.createElement('img');
   heroImgS.src = `https://api.opendota.com${heroNameS}`;
   heroImgSDiv.appendChild(heroImgS);
 
   // Shortest match data div
-  let shortMatchDiv = document.createElement("div");
-  shortMatchDiv.classList.add("short-match-div");
+  let shortMatchDiv = document.createElement('div');
+  shortMatchDiv.classList.add('short-match-div');
   heroSDiv.appendChild(shortMatchDiv);
 
-  let shortMatchNum = document.createElement("h3");
+  let shortMatchNum = document.createElement('h3');
   shortMatchNum.innerHTML = `Shortest Match ID: ${shortMatchId}`;
   shortMatchDiv.appendChild(shortMatchNum);
 
-  let shortestGame = document.createElement("p");
+  let shortestGame = document.createElement('p');
   shortestGame.innerHTML = `Duration: ${shortest} minutes`;
   shortMatchDiv.appendChild(shortestGame);
 
-  let shortestWL = document.createElement("p");
+  let shortestWL = document.createElement('p');
   shortestWL.innerHTML = `Game Result: ${shortestWin}`;
   shortMatchDiv.appendChild(shortestWL);
 
-  let heroS = document.createElement("p");
+  let heroS = document.createElement('p');
   heroS.innerHTML = `Hero: ${heroInfoShort.localized_name}`;
   shortMatchDiv.appendChild(heroS);
 
-  let kdaS = document.createElement("p");
+  let kdaS = document.createElement('p');
   kdaS.innerHTML = `KDA: ${killsS}/${deathsS}/${assistsS}`;
   shortMatchDiv.appendChild(kdaS);
 }
