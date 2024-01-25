@@ -1,122 +1,135 @@
 * {
-    padding: 0;
-    margin: 0;
-    font-family: 'Exo 2', sans-serif;
+  padding: 0;
+  margin: 0;
+  font-family: 'Exo 2', sans-serif;
 }
 
 body {
-    color: white;
-    background-image: url(https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/backgrounds/featured.jpg);
+  color: white;
+  background-image: url(https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/backgrounds/featured.jpg);
 }
 .home {
-background-image: url(./images/dota-hero-image.jpg);
-background-repeat: no-repeat;
+  background-image: url(./images/dota-hero-image.jpg);
+  background-repeat: no-repeat;
   background-attachment: fixed;
-  background-position: center; 
+  background-position: center;
 }
 
-.header-container, .footer-container {
-    display: flex;
-    justify-content: center;
+.header-container,
+.footer-container {
+  display: flex;
+  justify-content: center;
 }
 
 .header-container {
-    padding: 20px;
-    background-image: linear-gradient(to right, black, rgb(202, 8, 8));
+  padding: 20px;
+  background-image: linear-gradient(to right, black, rgb(202, 8, 8));
 }
 
 .search-bar-container {
-    width: 100%;
-    height: 80%;
-    position:absolute;
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  height: 80%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #title {
-    margin: 20px;
-    font-size: x-large;
-    text-align: center;
+  margin: 20px;
+  font-size: x-large;
+  text-align: center;
 }
 
 #search-input {
-    padding: 5px;
-    border-radius: 2px;
-    border: 1px solid red;
-    outline: none;
+  padding: 5px;
+  border-radius: 2px;
+  border: 1px solid red;
+  outline: none;
 }
 
 #search-input::-webkit-search-cancel-button {
-    -webkit-appearance: none;
+  -webkit-appearance: none;
 }
 
-#search-button {
-    padding: 5px;
-    border-radius: 2px;
-    border: 1px solid black;
-    background-color: red;
-    color: white;
+#search-button,
+#back-button {
+  padding: 5px;
+  border-radius: 2px;
+  border: 1px solid black;
+  background-color: red;
+  color: white;
 }
 
-#search-button:hover {
-    cursor: pointer;
-    transition: 0.5s;
-    background-color: rgb(248, 89, 89);
+#search-button:hover,
+#back-button:hover {
+  cursor: pointer;
+  transition: 0.5s;
+  background-color: rgb(248, 89, 89);
 }
 
 .footer-container {
-    width: 100%;
-    padding: 20px;
-    bottom: 0;
-    position: fixed;
-    background-color: black;
+  width: 100%;
+  padding: 20px;
+  bottom: 0;
+  position: fixed;
+  background-color: black;
 }
 
 #back-button {
-    right: 50%;
-    position: relative;
+  display: block;
+  margin: 0 auto;
+}
+
+#back-button a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .steam-user-container {
-    display: flex;
-    justify-content: center;
-    border: 1px solid red;
-    background-color: black;
+  display: flex;
+  justify-content: center;
+  border: 1px solid red;
+  background-color: black;
 }
 
 .profile {
-    border-radius: 50%;
+  border-radius: 50%;
 }
 
 .image-div {
-    margin: 10px;
-    display: flex;
-    justify-content: center;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
 }
 
 .match-container {
-    margin: 5%;
+  margin: 5%;
 }
 
 .hero-div {
-    margin: 3%;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+  margin: 3%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .hero-img-div {
-    display: flex;
-    justify-content: center;
-    flex-basis: 25%;
+  display: flex;
+  justify-content: center;
+  flex-basis: 25%;
 }
 
-.long-match-div, .short-match-div {
-    width: 70%;
-    padding: 1%;
-    font-size: larger;
-    border: 1px solid black;
-    background-image: linear-gradient(to right, rgb(6, 5, 5, 0.25) , rgba(36, 46, 75, 0.75));
+.long-match-div,
+.short-match-div {
+  width: 70%;
+  padding: 1%;
+  font-size: larger;
+  border: 1px solid black;
+  background-image: linear-gradient(
+    to right,
+    rgb(6, 5, 5, 0.25),
+    rgba(36, 46, 75, 0.75)
+  );
 }
