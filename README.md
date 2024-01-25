@@ -17,9 +17,13 @@ Welcome to the Dota API Tracker! This web application utilizes the OpenDota API 
 ## Installation
 
 ```
-1. Clone the repository using the command `git clone https://github.com/bwing2/brandon-dota-api-website.git`
+1. Clone the repository from GitHub using the command `git clone https://github.com/bwing2/brandon-dota-api-website.git` in GitBash.
 
-2. Navigate to the project directory: `cd brandon-dota-api-website`
+2. Navigate to the project directory: `cd brandon-dota-api-website`.
+
+3. Type `code .` to open the project inside of Visual Studio Code.
+
+4. Right click on the `index.html` file, and open it with a browser or live server.
 ```
 
 ## Usage
