@@ -180,7 +180,7 @@ function addContent(heroInfoLong, heroInfoShort, heroNameL, heroNameS) {
   heroLDiv.appendChild(heroImgLDiv);
 
   let heroImgL = document.createElement('img');
-  heroImgL.src = `https://api.opendota.com${heroNameL}`;
+  heroImgL.src = `https://cdn.dota2.com${heroNameL}`;
   heroImgLDiv.appendChild(heroImgL);
 
   // Longest match data div
@@ -219,7 +219,7 @@ function addContent(heroInfoLong, heroInfoShort, heroNameL, heroNameS) {
   heroSDiv.appendChild(heroImgSDiv);
 
   let heroImgS = document.createElement('img');
-  heroImgS.src = `https://api.opendota.com${heroNameS}`;
+  heroImgS.src = `https://cdn.dota2.com${heroNameS}`;
   heroImgSDiv.appendChild(heroImgS);
 
   // Shortest match data div
